@@ -1,0 +1,72 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+data = pd.read_csv('/content/Students Performance .csv')
+print(data.shape)
+
+
+data.head()
+
+data.tail()
+
+data.info()
+
+data.describe()
+
+data.isnull().sum()
+
+def getgrade(percentage, status):
+  if status == 'Fail':
+    return 'E'
+  if(percentage >= 90):
+    return 'O'
+  if(percentage >= 80):
+    return 'A'
+  if(percentage >= 70):
+    return 'B'
+  if(percentage >= 60):
+    return 'C'
+  if(percentage >= 40):
+    return 'D'
+  else :
+    return 'E'
+
+
+data['Sex'].value_counts(normalize = True)
+data['Sex'].value_counts(dropna = False).plot.bar(color = 'magenta')
+plt.title('Comparison of Males and Females')
+plt.xlabel('Sex')
+plt.ylabel('count')
+plt.show()
+
+data['Scholarship'].value_counts(normalize = True)
+data['Reading'].value_counts(dropna = False).plot.bar(color = 'cyan')
+plt.title('Comparison of various groups')
+plt.xlabel('Groups')
+plt.ylabel('count')
+plt.show()
+
+data['Listening_in_Class'].value_counts(normalize = True)
+data['Notes'].value_counts(dropna = False).plot.bar()
+plt.title('Comparison of listening in class and notes')
+plt.xlabel('Degree')
+plt.ylabel('count')
+plt.show()
+
+data['Grade'].value_counts(normalize = True)
+data['Project_work'].value_counts(dropna = False).plot.bar(figsize = (18, 10))
+plt.title('Comparison of grade and project work')
+plt.xlabel('score')
+plt.ylabel('count')
+plt.show()
+
+labels = ['Grade 0', 'Grade A', 'Grade B', 'Grade C', 'Grade D', 'Grade E']
+sizes = [58, 156, 260, 252, 223, 51]
+colors = ['yellow', 'gold', 'lightskyblue', 'lightcoral', 'pink', 'cyan']
+explode = (0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001)
+patches, texts = plt.pie(sizes, colors=colors, shadow=True, startangle=90)
+plt.legend(patches, labels)
+plt.axis('equal')
+plt.tight_layout()
+plt.show()
